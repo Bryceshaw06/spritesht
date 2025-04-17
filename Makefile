@@ -4,8 +4,13 @@ BUILD = build
 OBJ = $(BUILD)/obj
 OUT = $(BUILD)/out
 
-CFLAGS = -Iinput/libpng -Iinc -g
-LDFLAGS = -Linput/libpng -Linput/zlib -lpng -lz
+# Homebrew paths for Apple Silicon
+BREW_PREFIX = /opt/homebrew
+LIBPNG_PATH = $(BREW_PREFIX)/opt/libpng
+ZLIB_PATH = $(BREW_PREFIX)/opt/zlib
+
+CFLAGS = -I$(LIBPNG_PATH)/include -I$(ZLIB_PATH)/include -I$(INC) -g
+LDFLAGS = -L$(LIBPNG_PATH)/lib -L$(ZLIB_PATH)/lib -lpng -lz
 DEP = $(INC)/spritesht_lib.h
 
 all: $(OUT)/spritesht $(OUT)/libspritesht.a
